@@ -36,6 +36,11 @@ const webpackConfig = {
       { test: /\.json$/, include: srcPath, loader: 'json' },
       { test: /\.css$/, include: srcPath, loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss') },
       {
+        test: /\.scss$/,
+        include: srcPath,
+        loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+      },
+      {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
         include: srcPath,
         loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{progressive:true, optimizationLevel: 7, svgo:{removeTitle:true,removeViewBox:false,removeRasterImages:true,sortAttrs:true,removeAttrs:false}}'
