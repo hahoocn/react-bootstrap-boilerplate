@@ -25,7 +25,7 @@ const webpackConfig = {
     main: [
       'babel-polyfill',
       'webpack-hot-middleware/client?path=' + host + '__webpack_hmr',
-      'font-awesome-loader',
+      'font-awesome-loader!./src/theme/font-awesome.config.js',
       'bootstrap-loader',
       srcPath + 'index'
     ]

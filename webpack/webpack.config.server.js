@@ -20,7 +20,7 @@ const webpackConfig = {
   entry: {
     main: [
       'babel-polyfill',
-      'font-awesome-loader',
+      'font-awesome-loader!./src/theme/font-awesome.config.prod.js',
       'bootstrap-loader/extractStyles',
        srcPath + 'index'
      ]
