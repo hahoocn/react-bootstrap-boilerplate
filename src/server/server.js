@@ -82,7 +82,7 @@ app.use((req, res) => {
 if (port) {
   server.listen(port, (err) => {
     if (err) {
-      console.error(err);
+      console.error(`=> OMG!!! 🙀 ${err}`);
     }
     console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, port);
   });

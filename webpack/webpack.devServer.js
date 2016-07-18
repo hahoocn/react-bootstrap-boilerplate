@@ -28,7 +28,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.listen(port, (err) => {
   if (err) {
-    console.error(err);
+    console.error(`=> OMG!!! 🙀 ${err}`);
   } else {
     console.info('==> 🚧  Webpack development server listening at http://%s:%s', host, port);
   }
