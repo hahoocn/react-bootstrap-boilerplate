@@ -25,6 +25,8 @@ const webpackConfig = {
     main: [
       'babel-polyfill',
       'webpack-hot-middleware/client?path=' + host + '__webpack_hmr',
+      'font-awesome-loader',
+      'bootstrap-loader',
       srcPath + 'index'
     ]
   },
@@ -52,14 +54,22 @@ const webpackConfig = {
         loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       },
       {
+        test: /\.scss$/,
+        include: srcPath,
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'
+      },
+      {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
         include: srcPath,
         loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{progressive:true, optimizationLevel: 7, svgo:{removeTitle:true,removeViewBox:false,removeRasterImages:true,sortAttrs:true,removeAttrs:false}}'
       },
       {
-        test: /\.(woff2?|otf|eot|ttf)$/i,
-        include: srcPath,
-        loader: 'url?name=fonts/[name].[ext]'
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url?limit=10000&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file?name=fonts/[name].[ext]'
       },
       {
         test: /\.hbs$/, loader: "handlebars"

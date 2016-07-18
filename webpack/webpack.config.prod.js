@@ -17,7 +17,12 @@ const webpackConfig = {
   devtool: false,
   context: path.resolve(__dirname, '..'),
   entry: {
-    main: ['babel-polyfill', srcPath + 'index']
+    main: [
+      'babel-polyfill',
+      'font-awesome-loader',
+      'bootstrap-loader/extractStyles',
+       srcPath + 'index'
+     ]
   },
   output: {
     path: distPath,
@@ -29,7 +34,14 @@ const webpackConfig = {
       { test: /\.json$/, include: srcPath, loader: 'json' },
       { test: /\.css$/, include: srcPath, loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss') },
       { test: /\.(jpe?g|png|gif|svg)$/, include: srcPath, loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{progressive:true, optimizationLevel: 7, svgo:{removeTitle:true,removeViewBox:false,removeRasterImages:true,sortAttrs:true,removeAttrs:false}}' },
-      { test: /\.(woff2?|otf|eot|ttf)$/i, include: srcPath, loader: 'url?name=fonts/[name].[ext]' },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url?limit=10000&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file?name=fonts/[name].[ext]'
+      },
       { test: /\.hbs$/, loader: "handlebars" }
     ],
   },

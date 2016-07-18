@@ -18,7 +18,12 @@ const webpackConfig = {
   devtool: false,
   context: path.resolve(__dirname, '..'),
   entry: {
-    main: ['babel-polyfill', srcPath + 'index']
+    main: [
+      'babel-polyfill',
+      'font-awesome-loader',
+      'bootstrap-loader/extractStyles',
+       srcPath + 'index'
+     ]
   },
   output: {
     path: distPath,
@@ -35,7 +40,14 @@ const webpackConfig = {
         include: srcPath,
         loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{progressive:true, optimizationLevel: 7, svgo:{removeTitle:true,removeViewBox:false,removeRasterImages:true,sortAttrs:true,removeAttrs:false}}'
       },
-      { test: /\.(woff2?|otf|eot|ttf)$/i, include: srcPath, loader: 'url?name=fonts/[name].[ext]' }
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url?limit=10000&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file?name=fonts/[name].[ext]'
+      }
     ],
   },
   postcss: function () {
