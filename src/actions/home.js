@@ -7,11 +7,9 @@ export const SHOW_MOVIES_ASYNC = 'SHOW_MOVIES_ASYNC';
 
 const showHelloApi = (name) => {
   const result = new Promise(resolve => {
-    setTimeout(() => {
-      const resJson = { infoAsync: 'Async loading' };
-      resJson.name = name;
-      resolve(resJson);
-    }, 1000);
+    const resJson = { infoAsync: 'Async loading' };
+    resJson.name = name;
+    resolve(resJson);
   });
   return result;
 };

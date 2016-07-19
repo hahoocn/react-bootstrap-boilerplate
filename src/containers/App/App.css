@@ -1,0 +1,9 @@
+:global {
+  .nav .fa {
+    font-size: 2em;
+    line-height: 20px;
+  }
+  .navbar {
+    margin-bottom: 0;
+}
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router/lib/Link';
 import { showHello, showHelloAsync, showMoviesAsync } from '../../actions/home';
 import logoImg from '../../assets/images/logo.jpg';
 import Helmet from 'react-helmet';
@@ -13,13 +12,11 @@ class Home extends React.Component {
     showHello: React.PropTypes.func,
   };
 
-  state = {
-    info: 'Hahoo App!'
-  }
+  state = {}
 
   componentDidMount() {
     const { dispatch } = this.props;
-    if (!this.props.home.info) dispatch(showHello('About'));
+    if (!this.props.home.info) dispatch(showHello('Dispatch showHello action'));
     if (!this.props.home.moviesTotal) dispatch(showMoviesAsync());
     if (!this.props.home.name || !this.props.home.infoAsync) {
       dispatch(showHelloAsync('This is the content of'));
@@ -36,13 +33,31 @@ class Home extends React.Component {
     return (
       <div className={styles.main}>
         <Helmet title={config.app.title} />
-        <div className={styles.logo}><img src={logoImg} alt="" /></div>
-        <h1>{this.state.info}</h1>
-        <h2 className={styles.aboutBox}>
-          <Link to={'/about'} className={styles.about}>{home.info}</Link>
-        </h2>
-        <h2>Remote loading: Movies {home.moviesTotal}</h2>
-        <h3>{home.name} {home.infoAsync}</h3>
+        <div className={styles.masthead}>
+          <div className="container">
+            <div className={styles.logo}>
+              <p>
+                <img src={logoImg} alt="" />
+              </p>
+            </div>
+            <h1>Hahoo App!</h1>
+            <h2>Boilerplate app for bootstrap with React</h2>
+            <p>
+              <a className={styles.github} href="https://github.com/hahoocn/react-bootstrap-boilerplate" target="_blank">
+                <i className="fa fa-github" /> View on Github
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className={styles.content}>
+            <div>{home.info}</div>
+            <div>Remote loading: Movies {home.moviesTotal}</div>
+            <div>{home.name} {home.infoAsync}</div>
+          </div>
+        </div>
+
       </div>
 		);
   }
@@ -52,7 +67,7 @@ Home.fetchData = ({ store }) => {
   const fetch = Promise.all([
     store.dispatch(showHelloAsync('This is the content of')),
     store.dispatch(showMoviesAsync()),
-    store.dispatch(showHello('About'))
+    store.dispatch(showHello('Dispatch showHello action'))
   ]);
   return fetch;
 };
