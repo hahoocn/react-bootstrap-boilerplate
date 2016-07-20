@@ -10,16 +10,26 @@ class App extends React.Component {
     children: React.PropTypes.element,
   };
 
-  state = {}
+  state = {
+    navExpanded: false
+  }
+
+  onNavItemClick = () => {
+    this.setState({ navExpanded: false });
+  }
+
+  onNavbarToggle = () => {
+    this.setState({ navExpanded: ! this.state.navExpanded });
+  }
 
   render() {
     require('./App.css');
     return (
       <div>
-        <Navbar staticTop>
+        <Navbar staticTop expanded={this.state.navExpanded} onToggle={this.onNavbarToggle}>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{ color: '#33e0ff' }}>
+              <IndexLink to="/" onClick={this.onNavItemClick} activeStyle={{ color: '#33e0ff' }}>
                 <span>HahooApp</span>
               </IndexLink>
             </Navbar.Brand>
@@ -27,13 +37,13 @@ class App extends React.Component {
           </Navbar.Header>
 
           <Navbar.Collapse eventKey={0}>
-            <Nav navbar>
+            <Nav navbar role="navigation">
               <LinkContainer to="/about">
-                <NavItem eventKey={1}>About Us</NavItem>
+                <NavItem eventKey={1} onClick={this.onNavItemClick}>About Us</NavItem>
               </LinkContainer>
             </Nav>
             <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/hahoocn/react-bootstrap-boilerplate">
+              <NavItem eventKey={1} onClick={this.onNavItemClick} target="_blank" title="View on Github" href="https://github.com/hahoocn/react-bootstrap-boilerplate">
                 <i className="fa fa-github" />
               </NavItem>
             </Nav>
