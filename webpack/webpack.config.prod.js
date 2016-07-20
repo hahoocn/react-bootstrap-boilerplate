@@ -75,10 +75,34 @@ const webpackConfig = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        unused: true,
+        properties: true,
+        sequences: true,
         dead_code: true,
+        conditionals: true,
+        comparisons: true,
+        evaluate: true,
+        booleans: true,
+        unused: true,
+        loops: true,
+        hoist_funs: true,
+        cascade: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
         drop_debugger: true,
-        drop_console: true
+        unsafe: true,
+        hoist_vars: true,
+        negate_iife: true,
+        side_effects: true
+      },
+      mangle: {
+        toplevel: true,
+        sort: true,
+        eval: true,
+        properties: true
+      },
+      output: {
+        comments: false
       }
     })
   ],
