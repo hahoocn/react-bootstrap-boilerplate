@@ -32,19 +32,31 @@ const webpackConfig = {
     loaders: [
       { test: /\.(jsx|js)$/, include: srcPath, loaders: ['babel']},
       { test: /\.json$/, include: srcPath, loader: 'json' },
-      { test: /\.css$/, include: srcPath, loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss') },
+      {
+        test: /\.css$/,
+        include: srcPath,
+        loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
+      },
       {
         test: /\.scss$/,
         include: srcPath,
         loader: ExtractTextPlugin.extract('style', 'css?modules&minimize&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
-      { test: /\.(jpe?g|png|gif|svg)$/, include: srcPath, loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{progressive:true, optimizationLevel: 7, svgo:{removeTitle:true,removeViewBox:false,removeRasterImages:true,sortAttrs:true,removeAttrs:false}}' },
       {
-        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url?limit=10000&name=fonts/[name].[ext]"
+        test: /\.(jpe?g|png|gif)$/,
+        include: srcPath,
+        loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{ progressive:true, optimizationLevel: 7 }'
       },
       {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        test: /\.svg(\?[\s\S]+)?$/,
+        loader: 'url?limit=8192&name=svg/[name].[ext]&mimetype=image/svg+xml!image-webpack?{ svgo: {plugins: [{ removeUselessDefs: false }, { removeTitle: true }, { removeRasterImages: true }, { sortAttrs: true } ]} }'
+      },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url?limit=8192&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.(ttf|eot)(\?[\s\S]+)?$/,
         loader: 'file?name=fonts/[name].[ext]'
       },
       { test: /\.hbs$/, loader: "handlebars" }
