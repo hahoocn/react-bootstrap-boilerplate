@@ -49,17 +49,20 @@ const webpackConfig = {
       },
       {
         test: /\.svg(\?[\s\S]+)?$/,
+        include: srcPath,
         loader: 'url?limit=8192&name=svg/[name].[ext]&mimetype=image/svg+xml!image-webpack?{ svgo: {plugins: [{ removeUselessDefs: false }, { removeTitle: true }, { removeRasterImages: true }, { sortAttrs: true } ]} }'
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        include: srcPath,
         loader: "url?limit=8192&name=fonts/[name].[ext]"
       },
       {
         test: /\.(ttf|eot)(\?[\s\S]+)?$/,
+        include: srcPath,
         loader: 'file?name=fonts/[name].[ext]'
       },
-      { test: /\.hbs$/, loader: "handlebars" }
+      { test: /\.hbs$/, include: srcPath, loader: "handlebars" }
     ],
   },
   postcss: function () {
