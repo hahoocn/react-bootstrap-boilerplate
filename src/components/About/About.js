@@ -18,7 +18,7 @@ class About extends React.Component {
             ES2015, ESLint ... )
         </p>
       </div>
-		);
+    );
   }
 }
 

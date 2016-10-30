@@ -45,41 +45,42 @@ const webpackConfig = {
       },
       {
         test: /\.json$/,
-        include: srcPath,
         loader: 'json'
       },
       {
         test: /\.css$/,
-        include: srcPath,
         loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       },
       {
         test: /\.scss$/,
-        include: srcPath,
         loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'
       },
       {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        include: srcPath,
         loader: 'url?limit=8192&name=images/[name].[ext]!image-webpack?{ progressive:true, optimizationLevel: 7 }'
       },
       {
-        test: /\.svg(\?[\s\S]+)?$/,
+        test: /\.svg$/,
         include: srcPath,
         loader: 'url?limit=8192&name=svg/[name].[ext]&mimetype=image/svg+xml!image-webpack?{ svgo: {plugins: [{ removeUselessDefs: false }, { removeTitle: true }, { removeRasterImages: true }, { sortAttrs: true } ]} }'
       },
       {
+        test: /\.svg(\?[\s\S]+)?$/,
+        exclude: srcPath,
+        loader: 'url?limit=8192&name=fonts/[name].[ext]&mimetype=image/svg+xml'
+      },
+      {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        include: srcPath,
-        loader: "url?limit=8192&name=fonts/[name].[ext]"
+        loader: 'url?limit=8192&name=fonts/[name].[ext]'
       },
       {
         test: /\.(ttf|eot)(\?[\s\S]+)?$/,
-        include: srcPath,
         loader: 'file?name=fonts/[name].[ext]'
       },
       {
-        test: /\.hbs$/, include: srcPath, loader: "handlebars"
+        test: /\.hbs$/,
+        include: srcPath,
+        loader: 'handlebars'
       }
     ],
   },
@@ -96,7 +97,7 @@ const webpackConfig = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env':{
+      'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),

@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { showHello, showHelloAsync, showMoviesAsync } from '../../actions/home';
 import logoImg from '../../assets/images/logo.jpg';
-import Helmet from 'react-helmet';
 import config from '../../config';
 
 class Home extends React.Component {
   static propTypes = {
     dispatch: React.PropTypes.func,
     home: React.PropTypes.object,
-    showHello: React.PropTypes.func,
   };
 
   state = {}
@@ -29,6 +28,7 @@ class Home extends React.Component {
 
   render() {
     const styles = require('./Home.css');
+
     const { home } = this.props;
     return (
       <div className={styles.main}>
@@ -43,7 +43,7 @@ class Home extends React.Component {
             <h1>Hahoo App!</h1>
             <h2>Boilerplate app for bootstrap with React</h2>
             <p>
-              <a className={styles.github} href="https://github.com/hahoocn/react-bootstrap-boilerplate" target="_blank">
+              <a className={styles.github} href="https://github.com/hahoocn/react-bootstrap-boilerplate" target="_blank" rel="noopener noreferrer">
                 <i className="fa fa-github" /> View on Github
               </a>
             </p>
@@ -59,7 +59,7 @@ class Home extends React.Component {
         </div>
 
       </div>
-		);
+    );
   }
 }
 

@@ -19,11 +19,12 @@ class App extends React.Component {
   }
 
   onNavbarToggle = () => {
-    this.setState({ navExpanded: ! this.state.navExpanded });
+    this.setState({ navExpanded: !this.state.navExpanded });
   }
 
   render() {
     require('./App.css');
+
     return (
       <div>
         <Navbar staticTop expanded={this.state.navExpanded} onToggle={this.onNavbarToggle}>
@@ -36,7 +37,7 @@ class App extends React.Component {
             <Navbar.Toggle />
           </Navbar.Header>
 
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar role="navigation">
               <LinkContainer to="/about">
                 <NavItem eventKey={1} onClick={this.onNavItemClick}>About Us</NavItem>
@@ -53,7 +54,7 @@ class App extends React.Component {
           {this.props.children}
         </div>
       </div>
-		);
+    );
   }
 }
 
