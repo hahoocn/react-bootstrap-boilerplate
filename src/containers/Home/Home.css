@@ -4,28 +4,35 @@
   margin: 0;
   color: white;
   text-align: center;
+
   .logo {
     margin: 20px 0 0;
+
     img {
       width: 100px;
       margin: auto;
     }
   }
+
   h1 {
     color: #33e0ff;
     font-size: 4em;
   }
+
   h2 {
     color: #ddd;
     font-size: 2em;
     margin: 20px;
   }
+
   a {
     color: #ddd;
   }
+
   p {
     margin: 10px;
   }
+
   .github {
     font-size: 1.5em;
   }
@@ -35,6 +42,7 @@
   margin: 20px 0 0;
   font-size: 20px;
   text-align: center;
+
   div {
     margin: 10px;
   }
