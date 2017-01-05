@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   render() {
-    require('./App.css');
+    require('./styles.css');
 
     return (
       <div>

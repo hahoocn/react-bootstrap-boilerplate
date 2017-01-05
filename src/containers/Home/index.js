@@ -1,21 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { showHello, showHelloAsync, showMoviesAsync } from '../../actions/home';
+import { showHello, showHelloAsync, showMoviesAsync } from './actions';
 import logoImg from '../../assets/images/logo.jpg';
 import config from '../../config';
+import { selectInfo, selectHome } from './selectors';
 
 class Home extends React.Component {
   static propTypes = {
     dispatch: React.PropTypes.func,
     home: React.PropTypes.object,
+    homeinfo: React.PropTypes.string,
   };
 
   state = {}
 
   componentDidMount() {
     const { dispatch } = this.props;
-    if (!this.props.home.info) dispatch(showHello('Dispatch showHello action'));
+    if (!this.props.homeinfo) dispatch(showHello('Dispatch showHello action'));
     if (!this.props.home.moviesTotal) dispatch(showMoviesAsync());
     if (!this.props.home.name || !this.props.home.infoAsync) {
       dispatch(showHelloAsync('This is the content of'));
@@ -27,9 +29,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const styles = require('./Home.css');
+    const styles = require('./styles.css');
 
-    const { home } = this.props;
+    const { home, homeinfo } = this.props;
     return (
       <div className={styles.main}>
         <Helmet title={config.app.title} />
@@ -52,7 +54,7 @@ class Home extends React.Component {
 
         <div className="container">
           <div className={styles.content}>
-            <div>{home.info}</div>
+            <div>{homeinfo}</div>
             <div>Remote loading: Movies {home.moviesTotal}</div>
             <div>{home.name} {home.infoAsync}</div>
           </div>
@@ -72,11 +74,9 @@ Home.fetchData = ({ store }) => {
   return fetch;
 };
 
-const mapStateToProps = (state) => {
-  const select = {
-    home: state.home
-  };
-  return select;
-};
+const mapStateToProps = state => ({
+  home: selectHome(state).toObject(),
+  homeinfo: selectInfo(state),
+});
 
 export default connect(mapStateToProps)(Home);
