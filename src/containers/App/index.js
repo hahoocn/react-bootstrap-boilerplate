@@ -1,13 +1,14 @@
 import React from 'react';
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
+import Link from 'react-router-dom/Link';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import { ListItemLink } from '../../components';
+import { renderRoutes } from '../../routes';
 
 class App extends React.Component {
   static propTypes = {
-    children: React.PropTypes.element,
+    route: React.PropTypes.object.isRequired,
   };
 
   state = {
@@ -24,24 +25,25 @@ class App extends React.Component {
 
   render() {
     require('./styles.css');
+    const { route } = this.props;
 
     return (
       <div>
         <Navbar staticTop expanded={this.state.navExpanded} onToggle={this.onNavbarToggle}>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" onClick={this.onNavItemClick} activeStyle={{ color: '#33e0ff' }}>
+              <Link to="/" onClick={this.onNavItemClick}>
                 <span>HahooApp</span>
-              </IndexLink>
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
 
           <Navbar.Collapse>
             <Nav navbar role="navigation">
-              <LinkContainer to="/about">
-                <NavItem eventKey={1} onClick={this.onNavItemClick}>About Us</NavItem>
-              </LinkContainer>
+              <ListItemLink to="/about" onClick={this.onNavItemClick}>
+                About Us
+              </ListItemLink>
             </Nav>
             <Nav navbar pullRight>
               <NavItem eventKey={1} onClick={this.onNavItemClick} target="_blank" title="View on Github" href="https://github.com/hahoocn/react-bootstrap-boilerplate">
@@ -51,7 +53,7 @@ class App extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <div>
-          {this.props.children}
+          {renderRoutes(route.routes)}
         </div>
       </div>
     );

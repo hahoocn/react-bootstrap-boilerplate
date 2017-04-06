@@ -8,12 +8,14 @@ import { selectInfo, selectHome } from './selectors';
 
 class Home extends React.Component {
   static propTypes = {
-    dispatch: React.PropTypes.func,
-    home: React.PropTypes.object,
+    dispatch: React.PropTypes.func.isRequired,
+    home: React.PropTypes.object.isRequired,
     homeinfo: React.PropTypes.string,
   };
 
-  state = {}
+  static defaultProps = {
+    homeinfo: undefined,
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
