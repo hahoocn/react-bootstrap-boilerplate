@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
@@ -8,7 +9,7 @@ import { renderRoutes } from '../../routes';
 
 class App extends React.Component {
   static propTypes = {
-    route: React.PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired,
   };
 
   state = {

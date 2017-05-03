@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Route from 'react-router-dom/Route';
 import Link from 'react-router-dom/Link';
 
@@ -14,9 +15,9 @@ const ListItemLink = ({ to, children, onClick }) => (
 );
 
 ListItemLink.propTypes = {
-  to: React.PropTypes.string.isRequired,
-  children: React.PropTypes.node.isRequired,
-  onClick: React.PropTypes.func,
+  to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
 };
 
 ListItemLink.defaultProps = {
