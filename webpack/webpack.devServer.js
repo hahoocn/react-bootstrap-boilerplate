@@ -1,28 +1,26 @@
 import express from 'express';
 import webpack from 'webpack';
-import config from '../src/config';
-import webpackConfig from './webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import historyApiFallback from 'connect-history-api-fallback';
+import webpackConfig from './webpack.config.dev';
+import config from '../src/config';
 
 const compiler = webpack(webpackConfig);
 const host = config.host;
 const port = config.hotLoadPort;
 const serverOptions = {
-  contentBase: 'http://' + host + ':' + port,
-  quiet: true,
   noInfo: true,
-  hot: true,
-  inline: true,
+  quiet: true,
   lazy: false,
-  historyApiFallback: true,
-  compress: false,
   publicPath: webpackConfig.output.publicPath,
+  index: 'index.html',
   headers: { 'Access-Control-Allow-Origin': '*' },
   stats: { colors: true }
 };
 
 const app = express();
+app.use(historyApiFallback());
 app.use(webpackDevMiddleware(compiler, serverOptions));
 app.use(webpackHotMiddleware(compiler));
 
