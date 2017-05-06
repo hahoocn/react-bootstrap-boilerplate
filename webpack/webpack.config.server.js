@@ -103,25 +103,7 @@ const webpackConfig = {
               limit: 8192,
               name: 'images/[name].[ext]'
             }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              optipng: {
-                optimizationLevel: 4,
-              },
-              pngquant: {
-                quality: '75-90',
-                speed: 3,
-              }
-            }
-          },
+          }
         ]
       },
       {
@@ -137,24 +119,22 @@ const webpackConfig = {
             }
           },
           {
-            loader: 'image-webpack-loader',
+            loader: 'svgo-loader',
             options: {
-              svgo: {
-                plugins: [
-                  {
-                    removeUselessDefs: false
-                  },
-                  {
-                    removeTitle: true
-                  },
-                  {
-                    removeRasterImages: true
-                  },
-                  {
-                    sortAttrs: true
-                  }
-                ]
-              }
+              plugins: [
+                {
+                  removeUselessDefs: false
+                },
+                {
+                  removeTitle: true
+                },
+                {
+                  removeRasterImages: true
+                },
+                {
+                  sortAttrs: true
+                }
+              ]
             }
           },
         ]
@@ -167,8 +147,7 @@ const webpackConfig = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'fonts/[name].[ext]',
-              mimetype: 'image/svg+xml'
+              name: 'fonts/[name].[ext]'
             }
           },
         ]
